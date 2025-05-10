@@ -72,11 +72,10 @@ function App() {
   const numQuestions = questions.length;
   const maxPossiblePoints = questions.reduce((prev, cur) => prev + cur.points, 0);
 
-  // load the data on mount
   useEffect(() => {
     fetch("http://localhost:8000/questions")
       .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data })) // Fix: dispatch dataReceived instead of start
+      .then((data) => dispatch({ type: "dataReceived", payload: data })) 
       .catch((err) => {
         console.error("Error fetching data:", err);
         dispatch({ type: "dataFailed" });
@@ -114,7 +113,7 @@ function App() {
                   numQuestions={numQuestions}
                 />
               ) : (
-                <button onClick={() => dispatch({ type: "finish" })}>Finish</button> // Add finish button on last question
+                <button onClick={() => dispatch({ type: "finish" })}>Finish</button>
               )}
             </Footer>
           </>
