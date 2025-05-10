@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 
 function Timer({ dispatch, secondsRemaining }) {
   useEffect(() => {
+    if (secondsRemaining <= 0) return;
+
     const interval = setInterval(() => {
       dispatch({ type: "tick" });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [dispatch]);
+  }, [dispatch, secondsRemaining]);
 
   const safeSeconds = Math.max(secondsRemaining, 0);
   const minutes = Math.floor(safeSeconds / 60);
@@ -19,5 +21,4 @@ function Timer({ dispatch, secondsRemaining }) {
     </div>
   );
 }
-
 export default Timer;
